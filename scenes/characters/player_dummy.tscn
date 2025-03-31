@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpst8uw11baib"]
+
+[ext_resource type="Script" uid="uid://b02ro541it365" path="res://scripts/characters/player_dummy.gd" id="1_lxvoc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_48h08"]
+size = Vector2(40, 40)
+
+[node name="PlayerDummy" type="CharacterBody2D"]
+script = ExtResource("1_lxvoc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(5.0056e-06, 0.687911, 0.688799, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_48h08")
