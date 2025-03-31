@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://81iv125wbdsh"
+path="res://.godot/imported/03 - First Encounter.ogg-aad66157e4f0838fa2aff7c06c18dde6.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/OGG/03 - First Encounter.ogg"
+dest_files=["res://.godot/imported/03 - First Encounter.ogg-aad66157e4f0838fa2aff7c06c18dde6.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

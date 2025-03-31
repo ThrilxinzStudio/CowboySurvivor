@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cvk0a6f1f15f"
+path="res://.godot/imported/03 - First Encounter (Loop Version).ogg-efd696b04cc836ea9edc350d301a86cb.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/OGG/Looped Versions/03 - First Encounter (Loop Version).ogg"
+dest_files=["res://.godot/imported/03 - First Encounter (Loop Version).ogg-efd696b04cc836ea9edc350d301a86cb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

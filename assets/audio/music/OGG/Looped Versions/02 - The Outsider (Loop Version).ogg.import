@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dtvaerplaqqfj"
+path="res://.godot/imported/02 - The Outsider (Loop Version).ogg-e519b6031da40829178687f83e38228e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/OGG/Looped Versions/02 - The Outsider (Loop Version).ogg"
+dest_files=["res://.godot/imported/02 - The Outsider (Loop Version).ogg-e519b6031da40829178687f83e38228e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

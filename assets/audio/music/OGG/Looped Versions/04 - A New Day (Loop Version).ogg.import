@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://chsk7yresq28c"
+path="res://.godot/imported/04 - A New Day (Loop Version).ogg-e54af4bc8b658b8931e3be115d2aa442.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/OGG/Looped Versions/04 - A New Day (Loop Version).ogg"
+dest_files=["res://.godot/imported/04 - A New Day (Loop Version).ogg-e54af4bc8b658b8931e3be115d2aa442.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://beye5kfikn2pl"
+path="res://.godot/imported/05 - Here's To The Pioneers (Loop Version).ogg-1401604a4ee8611034b0883327cda1ab.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/OGG/Looped Versions/05 - Here's To The Pioneers (Loop Version).ogg"
+dest_files=["res://.godot/imported/05 - Here's To The Pioneers (Loop Version).ogg-1401604a4ee8611034b0883327cda1ab.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
