@@ -1,8 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://4rpj4m8setey"]
 
-[ext_resource type="PackedScene" uid="uid://bt4c1gfbllyk3" path="res://scenes/characters/player.tscn" id="1_lx3qq"]
+[ext_resource type="PackedScene" uid="uid://dpst8uw11baib" path="res://scenes/characters/player_dummy.tscn" id="1_lx3qq"]
 
 [node name="MainLevel" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_lx3qq")]
-position = Vector2(448, 420)
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_right = 1276.0
+offset_bottom = 723.0
+color = Color(0.577959, 0.377154, 0.0846237, 1)
+
+[node name="PlayerDummy" parent="." instance=ExtResource("1_lx3qq")]
+position = Vector2(262, 184)

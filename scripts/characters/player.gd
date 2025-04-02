@@ -14,4 +14,4 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	move_and_slide()
 	# player rotation pointing to mouse
-	look_at(get_global_mouse_position())
+	#look_at(get_global_mouse_position())
