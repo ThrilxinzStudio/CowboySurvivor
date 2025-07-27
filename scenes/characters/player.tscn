@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbldcryhltfdm"]
+
+[ext_resource type="Script" uid="uid://b1ejf0spsfvkf" path="res://scripts/characters/player.gd" id="1_76oj4"]
+[ext_resource type="Texture2D" uid="uid://bw7n75mvlv6wc" path="res://assets/ninja_upper.png" id="1_yewv4"]
+[ext_resource type="Texture2D" uid="uid://bfgdensokude4" path="res://assets/ninja_lower.png" id="2_76oj4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_76oj4"]
+size = Vector2(17, 22)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_76oj4")
+metadata/_edit_group_ = true
+
+[node name="SpriteUpper" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_yewv4")
+offset = Vector2(15, 0)
+hframes = 15
+
+[node name="SpriteLower" type="Sprite2D" parent="."]
+texture = ExtResource("2_76oj4")
+offset = Vector2(15, 0)
+hframes = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 2)
+shape = SubResource("RectangleShape2D_76oj4")
