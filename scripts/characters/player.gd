@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
+enum STATE {MOVE, CLIMB}
+
 @onready var animation_player_upper = $AnimationPlayerUpper
 @onready var animation_player_lower = $AnimationPlayerLower
 @onready var anchor = $Anchor
+@onready var ray_cast_upper = $Anchor/RayCastUpper
+@onready var ray_cast_lower = $Anchor/RayCastLower
+
 
 @export var max_speed: = 120
 @export var acceleration: = 1000
@@ -12,6 +17,10 @@ extends CharacterBody2D
 @export var up_gravity: = 500
 @export var down_gravity: = 600
 @export var jump_amount: = 200
+
+@export var state: = STATE.CLIMB
+
+var coyote_time: = 0 # this makes it not delay jump on edge on floow
 
 func _ready():
 	animation_player_lower.current_animation_changed.connect(func(animation_name: String):
@@ -25,30 +34,62 @@ func _ready():
 		)
 
 func _physics_process(delta: float) -> void:
-	var x_input = Input.get_axis("move_left", "move_right")
-	var y_input = Input.get_axis("move_up", "move_down")
-	
-	apply_gravity(delta)
-	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = -jump_amount
-	
-	if Input.is_action_just_pressed("attack"):
-		animation_player_upper.play("attack")
-	
-	
-	if x_input == 0:
-		apply_friction(delta)
-		animation_player_lower.play("stand")
-	else:
-		accelerate_horizontally(x_input, delta)
-		anchor.scale.x = sign(x_input)
-		animation_player_lower.play("run")
-		
-	if not is_on_floor():
-		animation_player_lower.play("jump")
-	
-	move_and_slide()
+	match state:
+		STATE.MOVE:
+			coyote_time -= delta
+			
+			var x_input = Input.get_axis("move_left", "move_right")
+			var y_input = Input.get_axis("move_up", "move_down")
+			
+			apply_gravity(delta)
+			
+			if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_time > 0):
+				velocity.y = -jump_amount
+			
+			if Input.is_action_just_pressed("attack"):
+				animation_player_upper.play("attack")
+			
+			
+			if x_input == 0:
+				apply_friction(delta)
+				animation_player_lower.play("stand")
+			else:
+				accelerate_horizontally(x_input, delta)
+				anchor.scale.x = sign(x_input)
+				animation_player_lower.play("run")
+				
+			if not is_on_floor():
+				animation_player_lower.play("jump")
+				
+			var was_on_floor:  = is_on_floor()
+			move_and_slide()
+			if was_on_floor and not is_on_floor() and velocity.y >= 0:
+				coyote_time = 0.1
+			if should_wall_climb():
+				state = STATE.CLIMB
+		STATE.CLIMB:
+			var wall_normal = get_wall_normal()
+			
+			var y_axis = Input.get_axis("move_up", "move_down")
+			var x_axis = Input.get_axis("move_left", "move_right")
+			
+			velocity.y = y_axis * max_speed * 0.8
+			
+			move_and_slide()
+			
+			if y_axis != 0:
+				animation_player_lower.play("climb")
+			else:
+				animation_player_lower.play("hang")
+				
+			var request_detach: bool = (sign(x_axis) == wall_normal.x)
+			
+			if not should_wall_climb() or request_detach:
+				state = STATE.MOVE
+
+
+func jump() -> void:
+	velocity.y = -jump_amount
 
 func accelerate_horizontally(horizontal_direction: float, delta: float) -> void:
 	var acceleration_amount: = acceleration
@@ -59,6 +100,14 @@ func apply_friction(delta) -> void:
 	var friction_amount: = friction
 	if not is_on_floor(): friction_amount = air_friction
 	velocity.x = move_toward(velocity.x, 0.0, friction_amount * delta)
+	
+
+func should_wall_climb() -> bool:
+	return (
+		ray_cast_upper.is_colliding()
+		and ray_cast_lower.is_colliding()
+		and not is_on_floor()
+	)
 
 func apply_gravity(delta) -> void:
 	if not is_on_floor():
