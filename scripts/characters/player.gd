@@ -10,9 +10,9 @@ enum STATE {MOVE, CLIMB}
 
 
 @export var max_speed: = 120
-@export var acceleration: = 1000
+@export var acceleration: = 10000
 @export var air_acceleration: = 2000
-@export var friction: = 1000
+@export var friction: = 10000
 @export var air_friction: = 3000
 @export var up_gravity: = 500
 @export var down_gravity: = 600
@@ -62,11 +62,16 @@ func _physics_process(delta: float) -> void:
 				animation_player_lower.play("jump")
 				
 			var was_on_floor:  = is_on_floor()
+			
 			move_and_slide()
+			
 			if was_on_floor and not is_on_floor() and velocity.y >= 0:
 				coyote_time = 0.1
+				
 			if should_wall_climb():
+				animation_player_upper.play("hang") # cancles attack animation while attached to wall or attaching to wall
 				state = STATE.CLIMB
+			
 		STATE.CLIMB:
 			var wall_normal = get_wall_normal()
 			
@@ -84,7 +89,19 @@ func _physics_process(delta: float) -> void:
 				
 			var request_detach: bool = (sign(x_axis) == wall_normal.x)
 			
+			var request_wall_jump: bool = (
+				(request_detach or Input.is_action_just_pressed("jump"))
+				and not Input.is_action_pressed("move_down")
+			)
+			
+			if request_wall_jump:
+				velocity.x = wall_normal.x * max_speed
+				anchor.scale.x = sign(velocity.x)
+				jump()
+				state = STATE.MOVE
+			
 			if not should_wall_climb() or request_detach:
+				if Input.is_action_pressed("move_up"): jump()
 				state = STATE.MOVE
 
 
