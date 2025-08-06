@@ -1,16 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://dro41tbn5ln2i"]
+[gd_scene load_steps=7 format=3 uid="uid://dro41tbn5ln2i"]
 
 [ext_resource type="Texture2D" uid="uid://mk2acjalf6xt" path="res://assets/cannon_enemy.png" id="1_con58"]
+[ext_resource type="Script" uid="uid://bhkopqmdidaw" path="res://scripts/characters/enemy_canon.gd" id="1_m6gwx"]
 [ext_resource type="Script" uid="uid://bice8vy5me6x5" path="res://scripts/environment/hurtbox.gd" id="2_gs0e8"]
+[ext_resource type="Script" uid="uid://cjhefvgirgg1" path="res://scripts/autoload/stats.gd" id="2_kdsil"]
 [ext_resource type="Script" uid="uid://cs1lbmu671o6e" path="res://scripts/environment/hitbox.gd" id="3_g5hbs"]
 
+[sub_resource type="Resource" id="Resource_pp21v"]
+script = ExtResource("2_kdsil")
+health = 3
+metadata/_custom_type_script = "uid://cjhefvgirgg1"
+
 [node name="EnemyCanon" type="Node2D"]
+script = ExtResource("1_m6gwx")
+stats = SubResource("Resource_pp21v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("1_con58")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 8
 script = ExtResource("2_gs0e8")
 metadata/_custom_type_script = "uid://bice8vy5me6x5"
 
@@ -18,6 +29,8 @@ metadata/_custom_type_script = "uid://bice8vy5me6x5"
 polygon = PackedVector2Array(-9, -2, -1, -7, -9, -9, -9, -12.3703, -9, -15, 7, -15, 8, -11, 4, -5, 9, -2, 9, 0, -9, 0)
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
 script = ExtResource("3_g5hbs")
 metadata/_custom_type_script = "uid://cs1lbmu671o6e"
 

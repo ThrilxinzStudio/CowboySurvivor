@@ -7,6 +7,7 @@ enum STATE {MOVE, CLIMB}
 @onready var anchor = $Anchor
 @onready var ray_cast_upper = $Anchor/RayCastUpper
 @onready var ray_cast_lower = $Anchor/RayCastLower
+@onready var hurtbox = $Anchor/Hurtbox
 
 
 @export var max_speed: = 120
@@ -31,6 +32,9 @@ func _ready():
 		if animation_name != "attack": return
 		animation_player_upper.play(animation_player_lower.current_animation)
 		animation_player_upper.seek(animation_player_lower.current_animation_position)
+		)
+	hurtbox.hurt.connect(func(other_hitbox: Hitbox):
+		queue_free()
 		)
 
 func _physics_process(delta: float) -> void:
